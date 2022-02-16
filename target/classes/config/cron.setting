@@ -1,0 +1,6 @@
+[com.czm.buffcrawlermaster.controller]
+CrawlerController.fetch = 0 0 4,15,19,21 * * ?
+CrawlerController.fetch1 = 0 0 5,16,20,22 * * ?
+CrawlerController.fetch2 = 0 0 6,17,21 * * ?
+CrawlerController.fetch3 = 0 0 6,13,18 * * ?
+CrawlerController.fetch4 = 0 0 12,14 * * ?

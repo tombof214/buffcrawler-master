@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czm.buffcrawlermaster.dao.ItemSnapShotMapper">
+    <insert id="insertToBF" useGeneratedKeys="true" keyProperty="id">
+        insert into butterfly_snapshot (gid,gname,gprice,ctime) values(#{gid},#{gname},#{gprice},#{ctime})
+    </insert>
+    <insert id="insertToKB" useGeneratedKeys="true" keyProperty="id">
+        insert into karambit_snapshot (gid,gname,gprice,ctime) values(#{gid},#{gname},#{gprice},#{ctime})
+    </insert>
+    <insert id="insertToBN" useGeneratedKeys="true" keyProperty="id">
+        insert into bayonet_snapshot (gid,gname,gprice,ctime) values(#{gid},#{gname},#{gprice},#{ctime})
+    </insert>
+    <insert id="insertToFP" useGeneratedKeys="true" keyProperty="id">
+        insert into flip_snapshot (gid,gname,gprice,ctime) values(#{gid},#{gname},#{gprice},#{ctime})
+    </insert>
+    <insert id="insertToST" useGeneratedKeys="true" keyProperty="id">
+        insert into stiletto_snapshot (gid,gname,gprice,ctime) values(#{gid},#{gname},#{gprice},#{ctime})
+    </insert>
+</mapper>

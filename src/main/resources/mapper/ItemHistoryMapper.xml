@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czm.buffcrawlermaster.dao.ItemHistoryMapper">
+    <resultMap id="BaseMap" type="com.czm.buffcrawlermaster.pojo.ItemHistory">
+        <id column="sell_id" jdbcType="VARCHAR" property="sell_id"></id>
+        <result column="pid" jdbcType="VARCHAR" property="pid"></result>
+        <result column="name" jdbcType="VARCHAR" property="name"></result>
+        <result column="transact_time" jdbcType="VARCHAR" property="transact_time"></result>
+        <result column="sell_price" jdbcType="INTEGER" property="sell_price"></result>
+        <result column="paint_wear" jdbcType="VARCHAR" property="paint_wear"></result>
+        <result column="paint_seed" jdbcType="VARCHAR" property="paint_seed"></result>
+        <result column="phase" jdbcType="VARCHAR" property="phase"></result>
+    </resultMap>
+
+    <select id="selectByName" resultType="com.czm.buffcrawlermaster.pojo.ItemHistory" parameterType="java.lang.String">
+        select * from ${tablename} where name like '蝴蝶刀%${pname}%' order by sell_price desc;
+    </select>
+<!--    <select id="selectByTimeAndPart" resultType="com.czm.buffcrawlermaster.pojo.ItemHistoryVO">-->
+<!--            select * from ((SELECT pid,`name`,transact_time,AVG(sell_price) as sell_price-->
+<!--            FROM butterfly_history WHERE transact_time between '${starttime}' and DATE_ADD('${starttime}',INTERVAL ${span} day)GROUP BY name,transact_time )-->
+<!--            UNION ALL-->
+<!--            (SELECT pid,`name`,transact_time,AVG(sell_price) as sell_price-->
+<!--             FROM bayonet_history WHERE transact_time  between '${starttime}' and DATE_ADD('${starttime}',INTERVAL ${span} day) GROUP BY name,transact_time )-->
+<!--            UNION ALL-->
+<!--             (SELECT pid,`name`,transact_time,AVG(sell_price) as sell_price-->
+<!--              FROM karambit_history WHERE transact_time between '${starttime}' and DATE_ADD('${starttime}',INTERVAL ${span} day) GROUP BY name,transact_time )-->
+<!--            UNION ALL-->
+<!--             (SELECT pid,`name`,transact_time,AVG(sell_price) as sell_price-->
+<!--              FROM flip_history WHERE transact_time between '${starttime}' and DATE_ADD('${starttime}',INTERVAL ${span} day) GROUP BY name,transact_time)-->
+<!--            UNION ALL-->
+<!--             (SELECT pid,`name`,transact_time,AVG(sell_price) as sell_price-->
+<!--              FROM stiletto_history WHERE transact_time between '${starttime}'-->
+<!--               and DATE_ADD('${starttime}',INTERVAL ${span} day) GROUP BY name,transact_time )) as a order by transact_time desc limit #{pagenum},#{limit}-->
+<!--    </select>-->
+    <select id="selectByTime" resultType="com.czm.buffcrawlermaster.pojo.ItemHistoryVO">
+        (SELECT pid,`name`,transact_time,AVG(sell_price) as sell_price
+                        FROM butterfly_history WHERE transact_time between '${starttime}' and DATE_ADD('${starttime}',INTERVAL ${span} day)GROUP BY name,transact_time )
+                       UNION ALL
+                       (SELECT pid,`name`,transact_time,AVG(sell_price) as sell_price
+                        FROM bayonet_history WHERE transact_time  between '${starttime}' and DATE_ADD('${starttime}',INTERVAL ${span} day) GROUP BY name,transact_time )
+                       UNION ALL
+                       (SELECT pid,`name`,transact_time,AVG(sell_price) as sell_price
+                        FROM karambit_history WHERE transact_time between '${starttime}' and DATE_ADD('${starttime}',INTERVAL ${span} day) GROUP BY name,transact_time )
+                       UNION ALL
+                       (SELECT pid,`name`,transact_time,AVG(sell_price) as sell_price
+                        FROM flip_history WHERE transact_time between '${starttime}' and DATE_ADD('${starttime}',INTERVAL ${span} day) GROUP BY name,transact_time)
+                       UNION ALL
+                       (SELECT pid,`name`,transact_time,AVG(sell_price) as sell_price
+                        FROM stiletto_history WHERE transact_time between '${starttime}'
+                                                        and DATE_ADD('${starttime}',INTERVAL ${span} day) GROUP BY name,transact_time )
+    </select>
+    <select id="selectByTimeAndPartition" resultType="Integer"></select>
+    <insert id="insertBFHistoryInfo">
+        insert into butterfly_history values(#{sell_id},#{pid},#{name},#{transact_time},#{sell_price}
+        ,#{paint_wear},#{paint_seed},#{phase}) on duplicate key update pid = values(pid),name = values(name),transact_time = values(transact_time),sell_price = values(sell_price),
+         paint_wear = values(paint_wear),paint_seed = values(paint_seed)
+        ,phase = values(phase)
+    </insert>
+    <insert id="insertBNHistoryInfo">
+        insert into bayonet_history values(#{sell_id},#{pid},#{name},#{transact_time},#{sell_price}
+                                            ,#{paint_wear},#{paint_seed},#{phase}) on duplicate key update pid = values(pid),name = values(name),transact_time = values(transact_time),sell_price = values(sell_price),
+            paint_wear = values(paint_wear),paint_seed = values(paint_seed)
+                ,phase = values(phase)
+    </insert>
+    <insert id="insertKBHistoryInfo">
+        insert into karambit_history values(#{sell_id},#{pid},#{name},#{transact_time},#{sell_price}
+                                            ,#{paint_wear},#{paint_seed},#{phase}) on duplicate key update pid = values(pid),name = values(name),transact_time = values(transact_time),sell_price = values(sell_price),
+            paint_wear = values(paint_wear),paint_seed = values(paint_seed)
+                ,phase = values(phase)
+    </insert>
+    <insert id="insertFPHistoryInfo">
+        insert into flip_history values(#{sell_id},#{pid},#{name},#{transact_time},#{sell_price}
+                                            ,#{paint_wear},#{paint_seed},#{phase}) on duplicate key update pid = values(pid),name = values(name),transact_time = values(transact_time),sell_price = values(sell_price),
+            paint_wear = values(paint_wear),paint_seed = values(paint_seed)
+                ,phase = values(phase)
+    </insert>
+    <insert id="insertSTHistoryInfo">
+        insert into stiletto_history values(#{sell_id},#{pid},#{name},#{transact_time},#{sell_price}
+                                            ,#{paint_wear},#{paint_seed},#{phase}) on duplicate key update pid = values(pid),name = values(name),transact_time = values(transact_time),sell_price = values(sell_price),
+            paint_wear = values(paint_wear),paint_seed = values(paint_seed)
+                ,phase = values(phase)
+    </insert>
+</mapper>
