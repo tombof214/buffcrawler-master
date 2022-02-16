@@ -1,7 +1,7 @@
 # buffcrawler-master
 fetch data from buff.163.com and show 
 此项目主要目的为基于webcollector的爬虫项目，仅供学习使用，后续将完善前端和后端相应接口，目前仅完成了爬虫服务
-开发进度10%
+
 
 
 前端：vue-cli2,element-ui
@@ -13,7 +13,8 @@ fetch data from buff.163.com and show
 ​		springboot: 2.5.9
 
 ​		mybatis
-    webcollector 2.x-alpha
+
+​		webcollector爬虫框架：2.x-alpha
 
 待开发：swagger-ui2
 
