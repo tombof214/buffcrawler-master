@@ -45,9 +45,9 @@ import okhttp3.Request;
 
 public class OwnRequester {
     public static class MRequester extends OkHttpRequester {
-
-        String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
-        String cookie = "Device-Id=dlRvdFYTOSna36VbtL6V; _ga=GA1.2.263644632.1624606469; _gid=GA1.2.591238343.1644649629; P_INFO=18062083786|1644845813|1|netease_buff|00&99|null&null&null#hub&420100#10#0|&0|null|18062083786; remember_me=U1098371549|g712dRQwg3k05BcXrAofzReksWpSlEsa; session=1-S7zGmiG78z_wj-SJaVXUUGh9y-mLuHeISzbRVJ55jqGZ2042187397; Locale-Supported=zh-Hans; game=csgo; _gat_gtag_UA_109989484_1=1; csrf_token=IjExYzI0MGVmYTJlY2I0YTExNzgxYjYxNzM3Mzk3Yjc5YzUxYjAzMmUi.FOv1eQ.CWrIQ5EogsBalr7HMp8339MZ1ig";
+       //填写自己的请求头
+       //String user-agent
+       //String cookie
 
         // 每次发送请求前都会执行这个方法来构建请求
         @Override
